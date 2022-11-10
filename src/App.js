@@ -1,21 +1,12 @@
 // import logo from "./logo.svg";
-import  { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import About from "./components/About";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-
-  
-
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 // let name = "Shivam";
 function App() {
@@ -30,7 +21,16 @@ function App() {
       setAlert(null);
     }, 2000);
   };
-  const toggleMode = () => {
+  const removeBodyClasses =()=>{
+    document.body.classList.remove('bg-light');
+    document.body.classList.remove('bg-warning');
+    document.body.classList.remove('bg-dark');
+    document.body.classList.remove('bg-danger');
+    document.body.classList.remove('bg-success');
+  }
+  const toggleMode = (cls) => {
+      removeBodyClasses();
+    document.body.classList.add('bg-'+cls);
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#112152";
@@ -48,33 +48,29 @@ function App() {
 
   return (
     <>
-    <Router>
-    
-    <Navbar
-        title="My-App"
-        aboutText="About My-App"
-        mode={mode}
-        toggleMode={toggleMode}
-      />
-      <Alert alert={alert} />
-     <div className="container my-3">
- <Switch>
-          <Route exact path="/about" >
-            <About />
-          </Route>
+      <Router>
+        <Navbar
+          title="My-App"
+          aboutText="About My-App"
+          mode={mode}
+          toggleMode={toggleMode}
+        />
+        <Alert alert={alert} />
+        {/* <div className="container my-3"> */}
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
 
-          <Route exact path="/" >
-          <TextForm heading="Enter text to analyze" showAlert={showAlert} />
-          </Route>
+            <Route path="/">
+              <TextForm heading="Enter text to analyze" showAlert={showAlert} />
+            </Route>
           </Switch>
-     </div>
-     
+      </Router>
+        {/* </div> */}
 
         {/* <About/> */}
-   
-     
-    </Router>
-     
+
       {/* <Navbar/> */}
     </>
     // <>

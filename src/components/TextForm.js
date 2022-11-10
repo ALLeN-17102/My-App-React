@@ -29,12 +29,19 @@ export default function TextForm(props) {
         props.showAlert("Converted to Capitalize","success");
         // setText("You have clicked on handleUpClick" );
     }
+    const handleCopy=()=>{
+      let newText = document.getElementById("exampleFormControlTextarea1");
+      newText.select();
+      newText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(newText.value);
+      props.showAlert("Copied to clipboard","success");
+    }
    
     const handleOnChange=(event)=>{
         // console.log('On change');
         setText(event.target.value);
     }
-    const [text, setText] = useState('Enter Text Here');
+    const [text, setText] = useState('');
     // setText("New Text");
   return (
     <>
@@ -46,19 +53,20 @@ export default function TextForm(props) {
           className="form-control"
           value={text}
           onChange={handleOnChange}
+          style={{backgroundColor:props.mode==='dark'?'grey':'white'}}
           id="exampleFormControlTextarea1"
           rows="8"
-        style={{backgroundColor:props.mode==='dark'?'grey':'white'}}
         ></textarea>
       </div>
-      <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
-      <button className="btn btn-primary mx-1" onClick={handleLowClick}>Convert to Lowercase</button>
-      <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear Text</button>
-      <button className="btn btn-primary mx-1" onClick={handleCapitalized}>Capitalized Case</button>
+      <button  disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleLowClick}>Convert to Lowercase</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy Text</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleCapitalized}>Capitalized Case</button>
+      <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
     </div>
     <div className="container my-3">
         <h1>Your Text Summary</h1>
-        <p>{text.split(" ").length} words and {text.length} characters</p>
+        <p>{text.split(" ").filter((element)=>{return element.length !==0}).length} words and {text.length} characters</p>
         <p>{0.008*text.split(" ").length} Minutes to read</p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Enter something to preview"}</p>
