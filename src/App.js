@@ -56,7 +56,7 @@ function App() {
           toggleMode={toggleMode}
         />
         <Alert alert={alert} />
-        {/* <div className="container my-3"> */}
+        <div className="container my-3">
           <Switch>
             <Route path="/about">
               <About />
@@ -66,13 +66,13 @@ function App() {
               <TextForm heading="Enter text to analyze" showAlert={showAlert} />
             </Route>
           </Switch>
+        </div>
       </Router>
-        {/* </div> */}
 
         {/* <About/> */}
 
       {/* <Navbar/> */}
-    </>
+</>
     // <>
     // <nav>
     //   <li>Home</li>

@@ -30,10 +30,10 @@ export default function TextForm(props) {
         // setText("You have clicked on handleUpClick" );
     }
     const handleCopy=()=>{
-      let newText = document.getElementById("exampleFormControlTextarea1");
-      newText.select();
-      newText.setSelectionRange(0, 99999);
-      navigator.clipboard.writeText(newText.value);
+      // let newText = document.getElementById("exampleFormControlTextarea1");
+      // newText.select();
+      // newText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(text);
       props.showAlert("Copied to clipboard","success");
     }
    
@@ -66,7 +66,8 @@ export default function TextForm(props) {
     </div>
     <div className="container my-3">
         <h1>Your Text Summary</h1>
-        <p>{text.split(" ").filter((element)=>{return element.length !==0}).length} words and {text.length} characters</p>
+        <p>{text.split(/\s+/).filter((element)=>{return element.length !==0}).length} words and {text.length} characters</p>
+        {/* <p>{text.split(" ").filter((element)=>{return element.length !==0}).length} words and {text.length} characters</p> */}
         <p>{0.008*text.split(" ").length} Minutes to read</p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Enter something to preview"}</p>
